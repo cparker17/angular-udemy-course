@@ -3,17 +3,19 @@
     <div class="col-4">
       <nav aria-label="...">
         <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
+          <li class="page-item"
+              [ngClass]="{ disabled: currentPage === 0}">
+            <a class="page-link" (click)="currentPage = currentPage - 1">Prev</a>
           </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2</a>
+          <li class="page-item"
+              [ngClass]="{ active: i === currentPage}"
+              *ngFor="let image of images; let i = index;">
+            <a (click)="currentPage = i"
+               class="page-link">{{ i + 1 }}</a>
           </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">4</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+          <li class="page-item"
+              [ngClass]="{ disabled: currentPage === images.length - 1}">
+            <a class="page-link" (click)="currentPage = currentPage + 1">Next</a>
           </li>
         </ul>
       </nav>
