@@ -9,7 +9,7 @@
             <a class="page-link"
                (click)="currentPage = currentPage - 1">Prev</a>
           </li>
-          <ng-container *ngFor="let image of images; let i = index;">
+          <ng-container *appTimes="images.length; let i = index">
             <li class="page-item"
                 [appClass]="{ active: i === currentPage}"
                 *ngIf="i < 5">
@@ -36,6 +36,10 @@
           <p>Default case</p>
         </div>
       </div>
+
+      <ul *appTimes="5">
+        <li>Hi there!</li>
+      </ul>
     </div>
   </div>
 </div>
