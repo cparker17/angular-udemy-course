@@ -1,24 +1,41 @@
 <div class="container">
-  <div class="row justify-content-center">
+  <br><br><br>
+  <div class="row">
     <div class="col-4">
       <nav aria-label="...">
         <ul class="pagination">
           <li class="page-item"
               [ngClass]="{ disabled: currentPage === 0}">
-            <a class="page-link" (click)="currentPage = currentPage - 1">Prev</a>
+            <a class="page-link"
+               (click)="currentPage = currentPage - 1">Prev</a>
           </li>
-          <li class="page-item"
-              [ngClass]="{ active: i === currentPage}"
-              *ngFor="let image of images; let i = index;">
-            <a (click)="currentPage = i"
-               class="page-link">{{ i + 1 }}</a>
-          </li>
+          <ng-container *ngFor="let image of images; let i = index;">
+            <li class="page-item"
+                [ngClass]="{ active: i === currentPage}"
+                *ngIf="i < 5">
+              <a (click)="currentPage = i"
+                 class="page-link">{{ i + 1 }}</a>
+            </li>
+          </ng-container>
           <li class="page-item"
               [ngClass]="{ disabled: currentPage === images.length - 1}">
-            <a class="page-link" (click)="currentPage = currentPage + 1">Next</a>
+            <a class="page-link"
+               (click)="currentPage = currentPage + 1">Next</a>
           </li>
         </ul>
       </nav>
+      <div>
+        <h4>{{ images[currentPage].title }}</h4>
+        <img [ngSrc]="images[currentPage].url">
+      </div>
+      <div [ngSwitch]="currentPage">
+        <div *ngSwitchCase="0">
+          <p>Current page is zero</p>
+        </div>
+        <div *ngSwitchDefault>
+          <p>Default case</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
